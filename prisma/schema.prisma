@@ -1,0 +1,192 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model SiteSettings {
+  id                     String   @id @default("default")
+  siteName               String   @default("Markaz Arabiyah")
+  tagline                String   @default("Pusat Bahasa Arab & Mediator Studi di Timur Tengah")
+  heroBadge              String   @default("Kampung Inggris Pare · Kediri")
+  heroTitle              String   @default("Pusat Bahasa Arab Intensif & Mediator Studi Timur Tengah")
+  heroSubtitle           String   @default("Program pembelajaran bahasa Arab terstruktur dari tingkat dasar (Shifr) hingga penguasaan kitab kuning, debat ilmiah, dan persiapan keberangkatan studi ke Timur Tengah.")
+  heroPrimaryCtaText     String   @default("Daftar Program Sekarang")
+  heroPrimaryCtaUrl      String   @default("https://ppdb.markazarabiyah.site")
+  heroSecondaryCtaText   String   @default("Konsultasi Studi Timur Tengah")
+  heroSecondaryCtaUrl    String   @default("https://api.whatsapp.com/send?phone=6285959867788&text=Assalamualaikum%20Admin%2C%20saya%20ingin%20konsultasi%20studi%20Timur%20Tengah")
+  logoUrl                String   @default("https://taplink.st/a/5/0/0/4/58786d.png?3")
+  bannerImageUrl         String   @default("")
+  batchAnnouncement      String   @default("Pendaftaran Program Paket Reguler & Markaz Huffadz — Kelas dimulai setiap tanggal 10")
+  whatsappCs             String   @default("6281212887788")
+  whatsappMiddleEast     String   @default("6285959867788")
+  address                String   @default("Jl. Cempaka, No. 32B, Tegalsari, Tulungrejo, Kec. Pare, Kabupaten Kediri, Jawa Timur (64212)")
+  mapsUrl                String   @default("https://goo.gl/maps/SV8Q3nvGXzfYkJ6k8")
+  mapsEmbedUrl           String   @default("https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.3437172740737!2d112.1830336!3d-7.7533211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e785c4e3e926daf%3A0x3975a8fb3e4c23a8!2sKursus%20Bahasa%20Arab%20Markaz%20Arabiyah!5e0!3m2!1sid!2sid!4v1794031081438!5m2!1sid!2sid")
+  instagramHandle        String   @default("ofc_markazarabiyah")
+  instagramUrl           String   @default("https://instagram.com/ofc_markazarabiyah/")
+  tiktokHandle           String   @default("markazarabiyah")
+  tiktokUrl              String   @default("https://www.tiktok.com/@markazarabiyah/")
+  facebookUrl            String   @default("https://facebook.com")
+  websiteUrl             String   @default("https://www.markazarabiyah.com")
+  ppdbExternalUrl        String   @default("https://ppdb.markazarabiyah.site")
+  cloudinaryCloudName    String   @default("")
+  cloudinaryApiKey       String   @default("")
+  cloudinaryApiSecret    String   @default("")
+  cloudinaryUploadPreset String   @default("")
+  posterScrollSpeed      Int      @default(38)
+  galleryCycleSpeed      Int      @default(4) // seconds per slot transition
+  updatedAt              DateTime @updatedAt
+}
+
+model PageSection {
+  id               String   @id @default(cuid())
+  key              String   @unique // "hero", "highlights", "programs", "gallery", "stats", "testimonials", "faq", "contact"
+  title            String
+  subtitle         String   @default("")
+  badge            String   @default("")
+  isActive         Boolean  @default(true)
+  sortOrder        Int      @default(0)
+  bgType           String   @default("solid") // "solid" | "image"
+  bgColor          String   @default("#FFFFFF") // "#FFFFFF" | "#FAF7F0" | "#171614"
+  bgImageUrl       String   @default("") // Desktop / Landscape image
+  bgImageMobileUrl String   @default("") // Optional Mobile / Portrait image
+  bgPosition       String   @default("center")
+  bgPosX           Float    @default(50) // 0 - 100 (%)
+  bgPosY           Float    @default(50) // 0 - 100 (%)
+  bgScale          Float    @default(100) // 100 - 250 (%)
+  bgMobilePosX     Float    @default(50) // 0 - 100 (%)
+  bgMobilePosY     Float    @default(50) // 0 - 100 (%)
+  bgMobileScale    Float    @default(100) // 100 - 250 (%)
+  overlayColor     String   @default("#171614") // "#171614" (dark aesthetic veil) | "#FFFFFF" (light veil)
+  overlayOpacity   Int      @default(58) // 0 - 95
+  updatedAt        DateTime @updatedAt
+}
+
+model LinkItem {
+  id           String   @id @default(cuid())
+  title        String
+  subtitle     String   @default("")
+  buttonText   String   @default("Buka Tautan")
+  url          String
+  badge        String   @default("")
+  iconName     String   @default("sparkles")
+  styleVariant String   @default("gold") // "gold" | "outline" | "dark"
+  isActive     Boolean  @default(true)
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Program {
+  id                 String   @id @default(cuid())
+  name               String
+  slug               String   @unique
+  category           String   @default("Reguler")
+  tagline            String
+  description        String
+  duration           String   @default("mulai tiap tgl 10")
+  posterUrl          String
+  cloudinaryPublicId String   @default("")
+  targetUrl          String   @default("https://ppdb.markazarabiyah.site")
+  ctaText            String   @default("Daftar via PPDB")
+  isFeatured         Boolean  @default(false)
+  isActive           Boolean  @default(true)
+  sortOrder          Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model GalleryItem {
+  id                 String   @id @default(cuid())
+  title              String
+  caption            String   @default("")
+  category           String   @default("Kegiatan Santri")
+  imageUrl           String
+  cloudinaryPublicId String   @default("")
+  isActive           Boolean  @default(true)
+  sortOrder          Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model StatItem {
+  id          String   @id @default(cuid())
+  value       String
+  label       String
+  description String   @default("")
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String   @default("Alumni Santri Markaz Arabiyah")
+  program   String   @default("")
+  content   String
+  rating    Int      @default(5)
+  isActive  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FaqItem {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  isActive  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model VisitLog {
+  id         String   @id @default(cuid())
+  source     String   @default("direct")
+  rawReferer String   @default("")
+  userAgent  String   @default("")
+  path       String   @default("/")
+  createdAt  DateTime @default(now())
+
+  @@index([source])
+  @@index([createdAt])
+}
+
+model ClickLog {
+  id          String   @id @default(cuid())
+  targetType  String   // "link" | "program" | "hero" | "contact" | "social"
+  targetId    String
+  targetLabel String
+  targetUrl   String
+  source      String   @default("direct")
+  createdAt   DateTime @default(now())
+
+  @@index([targetId])
+  @@index([targetType])
+  @@index([source])
+  @@index([createdAt])
+}
+
+model Registration {
+  id            String   @id @default(cuid())
+  fullName      String
+  whatsapp      String
+  gender        String   @default("Laki-laki")
+  city          String
+  programName   String
+  startPeriod   String   @default("Tanggal 10 Bulan Terdekat")
+  arabicLevel   String   @default("Pemula (Belum ada dasar)")
+  notes         String   @default("")
+  trafficSource String   @default("direct")
+  status        String   @default("Baru")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([status])
+  @@index([trafficSource])
+}

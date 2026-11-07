@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --surface-primary: #ffffff;
+    --surface-secondary: #faf7f0;
+    --ink-primary: #171614;
+    --ink-secondary: #57534e;
+    --gold-primary: #ffcf40;
+    --gold-deep: #8a6100;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #ffffff;
+    color: #171614;
+  }
+
+  body {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Smooth Horizontal Portrait Poster Marquee Rail */
+@keyframes markazPosterScroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.markaz-poster-marquee {
+  display: flex;
+  width: max-content;
+  animation: markazPosterScroll var(--marquee-duration, 38s) linear infinite;
+  will-change: transform;
+}
+
+.markaz-poster-marquee:hover,
+.markaz-poster-marquee:focus-within,
+.markaz-poster-marquee.is-paused {
+  animation-play-state: paused;
+}
+
+/* Smooth Crossfade & Subtle Scale for Abstract Bento Gallery */
+@keyframes markazGalleryCrossfade {
+  0% {
+    opacity: 0.25;
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-GalleryFadeIn {
+  animation: markazGalleryCrossfade 850ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .markaz-poster-marquee,
+  .animate-GalleryFadeIn {
+    animation: none !important;
+  }
+}
+
+/* Custom subtle scrollbars for manual horizontal scrub */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

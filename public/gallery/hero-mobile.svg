@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1280" width="720" height="1280">
+    <defs>
+      <linearGradient id="mbg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#1A1815" />
+        <stop offset="100%" stop-color="#352A18" />
+      </linearGradient>
+      <radialGradient id="mglow" cx="50%" cy="30%" r="60%">
+        <stop offset="0%" stop-color="#FFCF40" stop-opacity="0.28" />
+        <stop offset="100%" stop-color="#FFCF40" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+    <rect width="720" height="1280" fill="url(#mbg)" />
+    <rect width="720" height="1280" fill="url(#mglow)" />
+    <path d="M 360 180 A 220 220 0 0 1 580 400 L 580 1120 L 140 1120 L 140 400 A 220 220 0 0 1 360 180 Z" fill="none" stroke="#FFCF40" stroke-width="1.5" stroke-opacity="0.32" />
+    <text x="360" y="520" text-anchor="middle" fill="#FFCF40" font-family="Georgia, serif" font-size="92" font-weight="700" opacity="0.18">الْعَرَبِيَّة</text>
+  </svg>
